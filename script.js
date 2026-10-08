@@ -56,7 +56,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // ৩. Load Departments from Admin local storage
     function loadDepartmentsToDropdown() {
         const deptSelect = document.getElementById('department');
-        const departments = JSON.parse(localStorage.getItem('departments')) || ["HR", "IT", "Accounts", "Management"];
+        const departments = JSON.parse(localStorage.getItem('departments')) || ["HR & Administration Department", "Maintenance Department", "Store Department", "Procurement Department", "IT", "Accounts & Finance Department", "Management"];
         
         deptSelect.innerHTML = '<option value="" disabled selected>ডিপার্টমেন্ট নির্বাচন করুন</option>';
         departments.forEach(dept => {
