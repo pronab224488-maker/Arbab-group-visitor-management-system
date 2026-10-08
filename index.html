@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visitor Portal - Check-in & Token</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+    <div class="background-glow"></div>
+
+    <div class="main-container">
+        
+        <!-- Step 1: QR Scan or Welcome Screen -->
+        <div id="qr-view" class="view-section">
+            <div class="header-section">
+                <div class="logo-badge"><i class="fa-solid fa-qrcode"></i></div>
+                <h1>ভিজিটর চেক-ইন QR কোড</h1>
+                <p>মোবাইল ক্যামেরা দিয়ে স্ক্যান করুন অথবা নিচের বাটনে ক্লিক করুন</p>
+            </div>
+            
+            <div class="qr-box-wrapper" style="background:#fff; padding:15px; border-radius:16px; width:fit-content; margin: 0 auto;">
+                <div id="qrcode"></div>
+            </div>
+
+            <button type="button" id="manual-open-form-btn" class="submit-action-btn" style="margin-top: 25px;">
+                <span>সরাসরি ফর্ম ওপেন করুন</span> <i class="fa-solid fa-arrow-right"></i>
+            </button>
+        </div>
+
+        <!-- Step 2: Form & Token View -->
+        <div id="form-view" class="view-section" style="display: none;">
+            <div class="header-section">
+                <div class="logo-badge"><i class="fa-solid fa-id-card-clip"></i></div>
+                <h1>ভিজিটর তথ্য ফরম</h1>
+                <p>আজকের টোকেন নম্বর: <span id="display-token" style="color: #06b6d4; font-weight: bold; font-size: 18px;">লোড হচ্ছে...</span></p>
+            </div>
+
+            <form id="visitorForm" class="visitor-form">
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-user"></i> পূর্ণ নাম *</label>
+                        <input type="text" id="name" required placeholder="আপনার পুরো নাম লিখুন">
+                    </div>
+
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-phone"></i> মোবাইল নম্বর *</label>
+                        <input type="tel" id="phone" required placeholder="০১XXXXXXXXX">
+                    </div>
+
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-building"></i> ডিপার্টমেন্ট *</label>
+                        <select id="department" required>
+                            <option value="" disabled selected>ডিপার্টমেন্ট নির্বাচন করুন</option>
+                            <!-- Admin panel theke dynamic load hobe -->
+                        </select>
+                    </div>
+
+                    <div class="input-group">
+                        <label><i class="fa-solid fa-user-tie"></i> যার সাথে দেখা করবেন *</label>
+                        <input type="text" id="hostName" required placeholder="হোস্ট বা কর্মকর্তার নাম">
+                    </div>
+                </div>
+
+                <div class="input-group full-width">
+                    <label><i class="fa-solid fa-circle-question"></i> সাক্ষাতের উদ্দেশ্য *</label>
+                    <textarea id="purpose" rows="2" required placeholder="সাক্ষাতের কারণ সংক্ষেপে লিখুন..."></textarea>
+                </div>
+
+                <!-- Camera Section -->
+                <div class="camera-section">
+                    <label><i class="fa-solid fa-camera"></i> ভিজিটরের ছবি তুলুন *</label>
+                    <div class="camera-box">
+                        <video id="webcam" autoplay playsinline></video>
+                        <canvas id="canvas" style="display:none;"></canvas>
+                        <img id="photo-preview" alt="Captured Preview" style="display:none;">
+                    </div>
+                    <button type="button" id="capture-btn" class="capture-action-btn">
+                        <i class="fa-solid fa-camera-retro"></i> ছবি ক্যাপচার করুন
+                    </button>
+                </div>
+
+                <button type="submit" id="submit-btn" class="submit-action-btn">
+                    <span>তথ্য ও ছবি জমা দিন</span> <i class="fa-solid fa-arrow-right-to-bracket"></i>
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
